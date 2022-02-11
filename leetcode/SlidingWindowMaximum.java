@@ -1,9 +1,39 @@
 package leetcode;
 
+import java.util.TreeMap;
+
 //https://leetcode.com/problems/sliding-window-maximum/
 
 public class SlidingWindowMaximum {
-	//brute force. O(n^2)
+	
+	//using TreeMap O(n)
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        TreeMap<Integer, Integer> dictionary = new TreeMap<Integer, Integer>();
+        for(int i = 0; i < k; i++){
+            dictionary.put(nums[i], dictionary.getOrDefault(nums[i], 0) + 1);
+        }
+        int[] answer = new int[nums.length + 1 - k];
+        int start = 0;
+        answer[start] = dictionary.lastKey();
+        dictionary.put(nums[start], dictionary.get(nums[start]) - 1);
+        if(dictionary.get(nums[start]) == 0){
+            dictionary.remove(nums[start]);
+        }    
+        start++;	
+        
+        for(int i = k; i < nums.length; i++){
+            dictionary.put(nums[i], dictionary.getOrDefault(nums[i], 0) + 1);
+            answer[start] = dictionary.lastKey();
+            dictionary.put(nums[start], dictionary.get(nums[start]) - 1);
+            if(dictionary.get(nums[start]) == 0){
+                dictionary.remove(nums[start]);
+            }   
+            start++;
+        }
+        
+        return answer;
+    }
+	/****brute force. O(n^2)
     public int[] maxSlidingWindow(int[] nums, int k) {
         int start = 0;
         int end = k - 1;
@@ -52,5 +82,5 @@ public class SlidingWindowMaximum {
         }
         return positionOfLargest;
     }
-
+	***/
 }
