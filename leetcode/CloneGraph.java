@@ -46,5 +46,30 @@ public class CloneGraph {
         }
         return;
     }
+    
+    //single traverse O(n)
+//    public Node cloneGraph(Node node) {
+//        if(node == null){
+//            return null;
+//        }
+//        HashMap<Integer, Node> newNodes = new HashMap<Integer, Node>();
+//        return DFS(node, newNodes);
+//    }
+//    
+//    Node DFS(Node node, HashMap<Integer, Node> newNodes){
+//        if(newNodes.containsKey(node.val)){
+//            return newNodes.get(node.val);
+//        }
+//        Node newNode = new Node(node.val);
+//        newNodes.put(node.val, newNode);
+//        for(Node currentNode : node.neighbors){
+//            if(newNodes.containsKey(currentNode.val)){
+//                newNode.neighbors.add(newNodes.get(currentNode.val));
+//                continue;
+//            }
+//            newNode.neighbors.add(DFS(currentNode, newNodes));
+//        }
+//        return newNode;
+//    }
 
 }
